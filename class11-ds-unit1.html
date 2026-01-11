@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class XI - Data Structure Unit 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2c5282;
+            --accent-color: #d4af37;
+            --highlight-bg: #fffcf0;
+            --important-border: #f59e0b;
+            --text-color: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            border-bottom: 4px solid var(--primary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .header h2 {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            margin: 10px 0;
+        }
+
+        .exam-note {
+            background: var(--important-border);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Section Title */
+        .section-box {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 30px 0 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-box i { margin-right: 10px; }
+
+        /* Q&A Styles */
+        .qa-box {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .question {
+            font-weight: bold;
+            color: #c2410c;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .answer {
+            display: block;
+            padding-left: 10px;
+            border-left: 3px solid #cbd5e1;
+        }
+
+        /* Highlighting Important Questions */
+        .important {
+            background-color: var(--highlight-bg);
+            border: 2px solid var(--important-border) !important;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .important::after {
+            content: "⭐ 2026 Suggestion";
+            position: absolute;
+            top: -12px;
+            right: 10px;
+            background: var(--important-border);
+            color: white;
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            border-radius: 5px;
+        }
+
+        /* Table Design */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+
+        table, th, td {
+            border: 1px solid #cbd5e1;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: var(--primary-color);
+            padding: 12px;
+            text-align: center;
+        }
+
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        .highlight-text {
+            color: #d97706;
+            font-weight: bold;
+        }
+
+        /* List decoration */
+        ul {
+            padding-left: 20px;
+            list-style-type: square;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 20px; }
+            .header h1 { font-size: 1.4rem; }
+            table { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Class XI – Computer Application</h1>
+        <h2>Chapter–1 : DATA STRUCTURE</h2>
+        <div class="exam-note">🎯 ২০২৬ সালের পরীক্ষার জন্য অতি গুরুত্বপূর্ণ</div>
+    </div>
+
+    <div class="section-box"><i class="fas fa-edit"></i> 1. Very Short Answer (1 Mark)</div>
+    
+    <div class="qa-box">
+        <span class="question">Q1. Data কী?</span>
+        <span class="answer">Data হলো <b>কাঁচা তথ্য (Raw Facts)</b> যা সরাসরি কোনো অর্থ প্রকাশ করে না।</span>
+    </div>
+
+    <div class="qa-box">
+        <span class="question">Q2. Information কাকে বলে?</span>
+        <span class="answer">Processing করা Data থেকে যে অর্থপূর্ণ ফল পাওয়া যায়, তাকে <b>Information</b> বলে।</span>
+    </div>
+
+    <div class="qa-box important">
+        <span class="question">Q3. Data Structure কী?</span>
+        <span class="answer">ডেটাকে সংগঠিত (Organize) ও সংরক্ষণ (Store) করার নির্দিষ্ট পদ্ধতিকে <b>Data Structure</b> বলে।</span>
+    </div>
+
+    <div class="qa-box">
+        <span class="question">Q5. Primitive Data Structure কী?</span>
+        <span class="answer">যেসব ডেটা টাইপ একক মান ধারণ করে, যেমন– Integer, Float, Character ইত্যাদি।</span>
+    </div>
+
+    <div class="section-box"><i class="fas fa-list-ol"></i> 2. Short Answer (2–3 Marks)</div>
+
+    <div class="qa-box">
+        <span class="question">Q7. Linear Data Structure কী?</span>
+        <span class="answer">যে Data Structure-এ ডেটাগুলো ধারাবাহিকভাবে (Sequentially) সাজানো থাকে তাকে Linear Data Structure বলে।<br>
+        <span class="highlight-text">উদাহরণ: Array, Stack, Queue</span></span>
+    </div>
+
+    <div class="qa-box">
+        <span class="question">Q9. Static ও Dynamic Data Structure-এর পার্থক্য লেখ।</span>
+        <span class="answer">
+            <ul>
+                <li><b>Static:</b> Memory size স্থির থাকে (যেমন Array)</li>
+                <li><b>Dynamic:</b> Memory size পরিবর্তনশীল (যেমন Linked List)</li>
+            </ul>
+        </span>
+    </div>
+
+    <div class="section-box"><i class="fas fa-star"></i> 3. Long Answer (4–5 Marks)</div>
+
+    <div class="qa-box important">
+        <span class="question">Q10. Data Structure-এর শ্রেণিবিভাগ চিত্রসহ লেখ।</span>
+        <span class="answer">
+            Data Structure মূলত দুই প্রকার—<br>
+            <b>১. Primitive Data Structure:</b> Integer, Float, Character, Boolean<br>
+            <b>২. Non-Primitive Data Structure:</b>
+            <ul>
+                <li><b>Linear:</b> Array, Stack, Queue, Linked List</li>
+                <li><b>Non-Linear:</b> Tree, Graph</li>
+            </ul>
+            <p class="highlight-text">👉 এই প্রশ্নটি ২০২৬-এর জন্য অত্যন্ত গুরুত্বপূর্ণ!</p>
+        </span>
+    </div>
+
+    <div class="qa-box">
+        <span class="question">Q12. Stack Data Structure ব্যাখ্যা কর।</span>
+        <span class="answer">
+            Stack হলো একটি Linear Data Structure যা <b>LIFO (Last In First Out)</b> নীতিতে কাজ করে।<br>
+            অপারেশনসমূহ: <b>Push</b> (ডেটা ঢোকানো) ও <b>Pop</b> (ডেটা বের করা)।<br>
+            উদাহরণ: প্লেটের স্তূপ।
+        </span>
+    </div>
+
+    <div class="qa-box">
+        <span class="question">Q13. Queue Data Structure কী?</span>
+        <span class="answer">
+            Queue হলো Linear Data Structure যা <b>FIFO (First In First Out)</b> নীতিতে কাজ করে।<br>
+            উদাহরণ: টিকিট কাউন্টারের লাইনে দাঁড়ানো মানুষ।
+        </span>
+    </div>
+
+    <div class="section-box"><i class="fas fa-columns"></i> 4. Difference Type Questions</div>
+
+    <div class="qa-box important">
+        <span class="question">Q14. Stack ও Queue-এর পার্থক্য লেখ।</span>
+        <span class="answer">
+            <table>
+                <tr>
+                    <th>বৈশিষ্ট্য</th>
+                    <th>Stack</th>
+                    <th>Queue</th>
+                </tr>
+                <tr>
+                    <td>নীতি</td>
+                    <td>LIFO অনুসরণ করে</td>
+                    <td>FIFO অনুসরণ করে</td>
+                </tr>
+                <tr>
+                    <td>অপারেশন</td>
+                    <td>এক দিক দিয়ে (Top) হয়</td>
+                    <td>দুই দিক দিয়ে (Front & Rear) হয়</td>
+                </tr>
+                <tr>
+                    <td>কমান্ড</td>
+                    <td>Push ও Pop</td>
+                    <td>Enqueue ও Dequeue</td>
+                </tr>
+            </table>
+        </span>
+    </div>
+
+    <div class="qa-box important">
+        <span class="question">Q15. Data Structure ও Data Type-এর পার্থক্য লেখ।</span>
+        <span class="answer">
+            <table>
+                <tr>
+                    <th>Data Type</th>
+                    <th>Data Structure</th>
+                </tr>
+                <tr>
+                    <td>ডেটার ধরন নির্দেশ করে</td>
+                    <td>ডেটা সংগঠনের পদ্ধতি নির্দেশ করে</td>
+                </tr>
+                <tr>
+                    <td>একক মান সংরক্ষণ করে</td>
+                    <td>একাধিক ডেটা সংরক্ষণ করে</td>
+                </tr>
+                <tr>
+                    <td>উদাহরণ: Int, Char</td>
+                    <td>উদাহরণ: Array, Stack</td>
+                </tr>
+            </table>
+            <p class="highlight-text">👉 Exam Note: টেবিল আকারে লিখলে ফুল মার্কস পাওয়া যায়।</p>
+        </span>
+    </div>
+
+    <div class="section-box"><i class="fas fa-lightbulb"></i> 5. Board-Focused Questions</div>
+
+    <div class="qa-box important">
+        <span class="question">Q16. Linked List কী? Array-এর তুলনায় সুবিধা লেখ।</span>
+        <span class="answer">
+            Linked List হলো একটি Dynamic Linear Data Structure যেখানে প্রতিটি Node পরবর্তী Node-এর অ্যাড্রেস ধারণ করে।<br>
+            <b>সুবিধা:</b>
+            <ul>
+                <li>Memory size প্রয়োজন অনুযায়ী বাড়ানো বা কমানো যায়।</li>
+                <li>ডেটা ঢোকানো (Insertion) ও মোছা (Deletion) সহজ।</li>
+                <li>মেমোরি অপচয় কম হয়।</li>
+            </ul>
+        </span>
+    </div>
+
+    <div class="qa-box">
+        <span class="question">Q18. Real life example সহ Linear Data Structure ব্যাখ্যা কর।</span>
+        <span class="answer">
+            <b>বৈশিষ্ট্য:</b> ডেটা ধারাবাহিকভাবে সাজানো থাকে এবং Sequential order অনুসরণ করে।<br>
+            <b>উদাহরণ:</b>
+            <ul>
+                <li>Array: রোল নম্বরের তালিকা।</li>
+                <li>Stack: বইয়ের স্তূপ।</li>
+                <li>Queue: বাসের টিকিট কাউন্টারের লাইন।</li>
+                <li>Linked List: ট্রেনের বগি।</li>
+            </ul>
+        </span>
+    </div>
+
+    <div style="text-align:center; margin-top:40px; color: #64748b; font-size: 0.9rem;">
+        <p>© Super Success Computer Education Center - নতুন যুগের দিশারি</p>
+    </div>
+</div>
+
+</body>
+</html>

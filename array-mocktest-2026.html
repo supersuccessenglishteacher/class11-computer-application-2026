@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Test 2026 - ARRAY | SSCEC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e293b; --accent: #d97706; --success: #16a34a; --error: #dc2626; --bg: #f1f5f9;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
+        
+        /* Header & Info */
+        .header { background: var(--primary); color: white; padding: 25px 15px; text-align: center; border-radius: 15px 15px 0 0; border-bottom: 5px solid var(--accent); }
+        .center-name { font-size: 1.6rem; font-weight: 800; color: var(--accent); margin-bottom: 5px; }
+        .address { font-size: 0.9rem; opacity: 0.9; margin-bottom: 10px; }
+
+        .sticky-stats { position: sticky; top: 0; z-index: 100; background: #334155; color: white; padding: 12px; display: flex; justify-content: space-around; font-weight: bold; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .timer-box { color: #fbbf24; font-size: 1.2rem; }
+
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; }
+        
+        .q-card { padding: 25px; border-bottom: 1px solid #e2e8f0; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .question { font-size: 1.25rem; font-weight: 600; color: var(--primary); margin-bottom: 20px; line-height: 1.4; }
+        .options { display: grid; gap: 12px; }
+        .option { padding: 15px; border: 2px solid #cbd5e1; border-radius: 12px; cursor: pointer; transition: 0.3s; font-size: 1.1rem; background: #fff; }
+        .option:hover { border-color: var(--accent); background: #fffcf0; }
+
+        /* Highlight Logic */
+        .correct { background: var(--success) !important; color: white; border-color: #14532d; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); }
+        .wrong { background: var(--error) !important; color: white; border-color: #7f1d1d; }
+        .locked { pointer-events: none; }
+
+        /* Result Screen */
+        .result-screen { display: none; text-align: center; padding: 50px 20px; }
+        .final-score { font-size: 4rem; font-weight: 900; color: var(--primary); margin: 20px 0; }
+        
+        .btn { padding: 16px 30px; border-radius: 12px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; margin: 10px; transition: 0.3s; }
+        .btn-wa { background: #25d366; color: white; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); }
+        .btn-retry { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+
+<audio id="winSnd" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+<audio id="failSnd" src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"></audio>
+
+<div class="container">
+    <div class="header">
+        <div class="center-name">Super Success Computer Education Center</div>
+        <div class="address">
+            22/1 Bipin Paul Road, Nimta, Kolkata- 700049<br>
+            <i class="fas fa-phone"></i> 8017247298<br>
+	    <i class="fas fa-phone"></i> Class - XI
+        </div>
+        <h2 style="margin:5px 0 0; color:#fff">Mock Test 2026: ARRAY (Chapter-2)</h2>
+    </div>
+
+    <div class="sticky-stats" id="statsBar">
+        <div class="timer-box"><i class="fas fa-hourglass-half"></i> <span id="timer">00:00</span></div>
+        <div>Score: <span id="scoreText">0</span> / 14</div>
+    </div>
+
+    <div id="quiz-box">
+        </div>
+
+    <div id="result-box" class="result-screen">
+        <i class="fas fa-award" style="font-size: 100px; color: var(--accent);"></i>
+        <h1>দারুণ পরীক্ষা দিয়েছ!</h1>
+        <div class="final-score" id="scoreDisplay">0</div>
+        <p style="font-size:1.2rem">মোট সময় লেগেছে: <span id="timeTaken">0</span></p>
+        
+        <a id="waLink" href="#" target="_blank" class="btn btn-wa">
+            <i class="fab fa-whatsapp"></i> স্যারকে রেজাল্ট পাঠাও
+        </a><br>
+        <button class="btn btn-retry" onclick="location.reload()">আবার শুরু করো</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        { q: "Array-এর প্রথম Index সাধারণত কত হয়?", o: ["1", "0", "-1"], c: "0" },
+        { q: "Array কোন ধরনের Data Structure?", o: ["Linear & Static", "Non-Linear", "Dynamic"], c: "Linear & Static" },
+        { q: "একই ধরনের একাধিক ডেটার সংগ্রহকে কী বলে?", o: ["Variable", "Array", "Linked List"], c: "Array" },
+        { q: "Array-এর উপাদানের অবস্থান নম্বরকে কী বলে?", o: ["Value", "Pointer", "Index"], c: "Index" },
+        { q: "1D Array-তে কয়টি Index ব্যবহৃত হয়?", o: ["১টি", "২টি", "৩টি"], c: "১টি" },
+        { q: "row ও column আকারে ডেটা থাকে কোন অ্যারে-তে?", o: ["1D Array", "2D Array", "3D Array"], c: "2D Array" },
+        { q: "Array Declaration-এর সঠিক উদাহরণ কোনটি?", o: ["int a[5];", "a = 5;", "int a;"], c: "int a[5];" },
+        { q: "Array-তে শুরুতেই মান দেওয়াকে কী বলে?", o: ["Declaration", "Initialization", "Input"], c: "Initialization" },
+        { q: "অ্যারের অসুবিধা কোনটি?", o: ["দ্রুত অ্যাক্সেস", "স্থির সাইজ (Fixed size)", "সহজ কোড"], c: "স্থির সাইজ (Fixed size)" },
+        { q: "অ্যারে-র মেমোরি লোকেশন কেমন হয়?", o: ["ধারাবাহিক (Continuous)", "এলোমেলো", "ভার্চুয়াল"], c: "ধারাবাহিক (Continuous)" },
+        { q: "int a[5]; - এখানে অ্যারের সাইজ কত?", o: ["4", "5", "6"], c: "5" },
+        { q: "Array-র তুলনায় Dynamic মেমোরি কোনটি?", o: ["Static Array", "Linked List", "Stack"], c: "Linked List" },
+        { q: "Row-Column-এর জন্য index সংখ্যা কয়টি?", o: ["১টি", "২টি", "৩টি"], c: "২টি" },
+        { q: "অ্যারে ব্যবহার করে যোগফল নির্ণয়ে কোনটি লাগে?", o: ["Loop", "Switch", "Pointer"], c: "Loop" }
+    ];
+
+    let score = 0, current = 0, sec = 0;
+    let timerId = setInterval(() => {
+        sec++;
+        let m = Math.floor(sec/60), s = sec%60;
+        document.getElementById('timer').innerText = `${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+    }, 1000);
+
+    const quizBox = document.getElementById('quiz-box');
+    quizData.forEach((data, idx) => {
+        let optHtml = data.o.map(opt => `<div class="option" onclick="handle(this, '${opt}', '${data.c}')">${opt}</div>`).join('');
+        quizBox.innerHTML += `
+            <div class="q-card">
+                <div class="question">${idx+1}. ${data.q}</div>
+                <div class="options">${optHtml}</div>
+            </div>
+        `;
+    });
+
+    function handle(el, sel, cor) {
+        let parent = el.parentElement;
+        if(parent.classList.contains('locked')) return;
+        parent.classList.add('locked');
+        current++;
+
+        if(sel === cor) {
+            score++;
+            el.classList.add('correct');
+            document.getElementById('winSnd').play();
+            document.getElementById('scoreText').innerText = score;
+        } else {
+            el.classList.add('wrong');
+            document.getElementById('failSnd').play();
+            Array.from(parent.children).forEach(o => {
+                if(o.innerText === cor) o.classList.add('correct');
+            });
+        }
+
+        if(current === quizData.length) finish();
+    }
+
+    function finish() {
+        clearInterval(timerId);
+        setTimeout(() => {
+            document.getElementById('quiz-box').style.display = 'none';
+            document.getElementById('statsBar').style.display = 'none';
+            document.getElementById('result-box').style.display = 'block';
+            document.getElementById('scoreDisplay').innerText = score + " / 14";
+            let finalTime = document.getElementById('timer').innerText;
+            document.getElementById('timeTaken').innerText = finalTime;
+
+            let text = `স্যার, আমি ARRAY মক টেস্ট ২০২৬ সম্পন্ন করেছি।%0Aস্কোর: ${score}/14%0Aসময়: ${finalTime}%0Aনাম: `;
+            document.getElementById('waLink').href = `https://wa.me/918017247298?text=${text}`;
+        }, 1000);
+    }
+</script>
+</body>
+</html>

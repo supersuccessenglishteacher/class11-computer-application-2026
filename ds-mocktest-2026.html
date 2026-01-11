@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Test 2026 - Data Structure | SSCEC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a; --accent: #f59e0b; --success: #22c55e; --error: #ef4444; --bg: #f8fafc;
+        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; color: #333; }
+        
+        /* Header & Branding */
+        .header { background: var(--primary); color: white; padding: 20px; text-align: center; border-radius: 15px 15px 0 0; border-bottom: 4px solid var(--accent); }
+        .center-name { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 5px; text-transform: uppercase; }
+        .address { font-size: 0.85rem; opacity: 0.9; margin-bottom: 10px; line-height: 1.4; }
+
+        .quiz-info { display: flex; justify-content: space-around; background: #1e293b; padding: 15px; margin-bottom: 20px; color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .timer-box { font-size: 1.2rem; color: var(--accent); font-weight: bold; }
+
+        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; }
+        
+        .q-card { padding: 20px; border-bottom: 1px solid #e2e8f0; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .question { font-size: 1.2rem; font-weight: 600; color: var(--primary); margin-bottom: 15px; line-height: 1.5; }
+        .options { display: grid; gap: 10px; }
+        .option { padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; transition: 0.3s; font-size: 1.1rem; background: #fff; }
+        .option:hover { border-color: var(--accent); background: #fffcf0; }
+
+        /* Highlights */
+        .correct { background: var(--success) !important; color: white; border-color: #166534; }
+        .wrong { background: var(--error) !important; color: white; border-color: #991b1b; }
+        .locked { pointer-events: none; opacity: 0.8; }
+
+        /* Result Area */
+        .result-screen { display: none; text-align: center; padding: 40px 20px; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid var(--accent); line-height: 150px; font-size: 3rem; margin: 0 auto 20px; font-weight: 800; color: var(--primary); }
+        
+        .btn { padding: 15px 25px; border-radius: 10px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; margin: 10px; transition: 0.3s; }
+        .btn-wa { background: #25d366; color: white; }
+        .btn-retry { background: var(--primary); color: white; }
+        
+        .footer { text-align: center; padding: 20px; font-size: 0.9rem; color: #64748b; }
+    </style>
+</head>
+<body>
+
+<audio id="correctSnd" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+<audio id="wrongSnd" src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"></audio>
+
+<div class="container">
+    <div class="header">
+        <div class="center-name">Super Success Computer Education Center</div>
+        <div class="address">
+            22/1 Bipin Paul Road, Nimta, Kolkata- 700049<br>
+            <i class="fas fa-phone"></i> 8017247298
+        </div>
+        <h2 style="margin-bottom:0; color:var(--accent)">Mock Test 2026: Data Structure</h2>
+    </div>
+
+    <div class="quiz-info" id="stats">
+        <div class="timer-box"><i class="fas fa-clock"></i> <span id="time">00:00</span></div>
+        <div>Score: <span id="currentScore">0</span> / 18</div>
+    </div>
+
+    <div id="quiz-area">
+        </div>
+
+    <div id="result-area" class="result-screen">
+        <i class="fas fa-trophy" style="font-size: 80px; color: var(--accent);"></i>
+        <h2>পরীক্ষা শেষ!</h2>
+        <div class="score-circle" id="finalScore">0</div>
+        <p>সময় লেগেছে: <span id="finalTime">0</span></p>
+        
+        <a id="waBtn" href="#" target="_blank" class="btn btn-wa">
+            <i class="fab fa-whatsapp"></i> স্যারকে জানাও (Send Result)
+        </a><br>
+        <button class="btn btn-retry" onclick="location.reload()">আবার শুরু করো</button>
+    </div>
+
+    <div class="footer">
+        © 2026 SSCEC - নতুন যুগের দিশারি
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Data Structure কী?", o: ["ডেটা সংরক্ষণের পদ্ধতি", "একটি হার্ডওয়্যার", "ইন্টারনেট কানেকশন"], c: "ডেটা সংরক্ষণের পদ্ধতি" },
+        { q: "LIFO নীতি কোথায় ব্যবহৃত হয়?", o: ["Queue", "Stack", "Array"], c: "Stack" },
+        { q: "FIFO নীতি কোথায় ব্যবহৃত হয়?", o: ["Stack", "Queue", "Tree"], c: "Queue" },
+        { q: "নিচের কোনটি Linear Data Structure?", o: ["Tree", "Graph", "Array"], c: "Array" },
+        { q: "Data হলো একধরণের—", o: ["Raw Facts", "Meaningful Result", "Output"], c: "Raw Facts" },
+        { q: "Processing করার পর প্রাপ্ত অর্থপূর্ণ ফলকে কী বলে?", o: ["Data", "Information", "Structure"], c: "Information" },
+        { q: "নিচের কোনটি Primitive Data Structure?", o: ["Stack", "Queue", "Integer"], c: "Integer" },
+        { q: "কোন Data Structure-এ মেমোরি সাইজ স্থির থাকে?", o: ["Static", "Dynamic", "Linked List"], c: "Static" },
+        { q: "Array-তে ডেটা কীভাবে সংরক্ষিত থাকে?", o: ["এলোমেলোভাবে", "ধারাবাহিক (Sequential)", "অদৃশ্যভাবে"], c: "ধারাবাহিক (Sequential)" },
+        { q: "Stack-এ নতুন ডেটা ঢোকানোকে কী বলে?", o: ["Pop", "Push", "Delete"], c: "Push" },
+        { q: "Stack থেকে ডেটা বের করাকে কী বলে?", o: ["Push", "Pop", "Insert"], c: "Pop" },
+        { q: "টিকিট কাউন্টারের লাইন কোন Data Structure-এর উদাহরণ?", o: ["Stack", "Queue", "Tree"], c: "Queue" },
+        { q: "Linked List কোন ধরণের Data Structure?", o: ["Static", "Dynamic", "Primitive"], c: "Dynamic" },
+        { q: "নিচের কোনটি Non-Linear Data Structure?", o: ["Array", "Linked List", "Tree"], c: "Tree" },
+        { q: "ডেটা টাইপ (Data Type) কী নির্দেশ করে?", o: ["ডেটা সংগঠনের পদ্ধতি", "ডেটার ধরন", "মেমোরি লোকেশন"], c: "ডেটার ধরন" },
+        { q: "Linked List-এ প্রতিটি ইউনিটকে কী বলা হয়?", o: ["Block", "Node", "Link"], c: "Node" },
+        { q: "ট্রেনের বগি একে অপরের সাথে যুক্ত থাকা কিসের উদাহরণ?", o: ["Stack", "Linked List", "Queue"], c: "Linked List" },
+        { q: "Queue-তে ডেটা যে দিক দিয়ে ঢোকানো হয় তাকে কী বলে?", o: ["Front", "Rear", "Top"], c: "Rear" }
+    ];
+
+    let score = 0, answered = 0, seconds = 0;
+    let timer = setInterval(() => {
+        seconds++;
+        let m = Math.floor(seconds/60), s = seconds%60;
+        document.getElementById('time').innerText = `${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+    }, 1000);
+
+    const quizArea = document.getElementById('quiz-area');
+    questions.forEach((item, index) => {
+        let opts = item.o.map(opt => `<div class="option" onclick="checkAns(this, '${opt}', '${item.c}')">${opt}</div>`).join('');
+        quizArea.innerHTML += `
+            <div class="q-card">
+                <div class="question">${index+1}. ${item.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+        `;
+    });
+
+    function checkAns(el, selected, correct) {
+        let parent = el.parentElement;
+        if(parent.classList.contains('locked')) return;
+        parent.classList.add('locked');
+        answered++;
+
+        if(selected === correct) {
+            score++;
+            el.classList.add('correct');
+            document.getElementById('correctSnd').play();
+            document.getElementById('currentScore').innerText = score;
+        } else {
+            el.classList.add('wrong');
+            document.getElementById('wrongSnd').play();
+            // সঠিক উত্তরটি হাইলাইট করা
+            Array.from(parent.children).forEach(opt => {
+                if(opt.innerText === correct) opt.classList.add('correct');
+            });
+        }
+
+        if(answered === questions.length) finish();
+    }
+
+    function finish() {
+        clearInterval(timer);
+        setTimeout(() => {
+            document.getElementById('quiz-area').style.display = 'none';
+            document.getElementById('stats').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+            document.getElementById('finalScore').innerText = score;
+            let timeStr = document.getElementById('time').innerText;
+            document.getElementById('finalTime').innerText = timeStr;
+
+            let msg = `স্যার, আমি Data Structure মক টেস্ট ২০২৬ সম্পন্ন করেছি।%0Aস্কোর: ${score}/18%0Aসময় লেগেছে: ${timeStr}%0Aছাত্রের নাম: `;
+            document.getElementById('waBtn').href = `https://wa.me/918017247298?text=${msg}`;
+        }, 1000);
+    }
+</script>
+</body>
+</html>

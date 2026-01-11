@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Test 2026 - STACK | SSCEC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a; --accent: #f59e0b; --success: #22c55e; --error: #ef4444; --bg: #f1f5f9;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
+        
+        /* Header & Info */
+        .header { background: var(--primary); color: white; padding: 25px 15px; text-align: center; border-radius: 15px 15px 0 0; border-bottom: 5px solid var(--accent); }
+        .center-name { font-size: 1.6rem; font-weight: 800; color: var(--accent); margin-bottom: 5px; }
+        .address { font-size: 0.9rem; opacity: 0.9; margin-bottom: 10px; }
+
+        .sticky-stats { position: sticky; top: 0; z-index: 100; background: #1e293b; color: white; padding: 12px; display: flex; justify-content: space-around; font-weight: bold; box-shadow: 0 2px 10px rgba(0,0,0,0.2); border-radius: 0 0 10px 10px; }
+        .timer-box { color: #fcd34d; font-size: 1.2rem; }
+
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; }
+        
+        .q-card { padding: 25px; border-bottom: 1px solid #e2e8f0; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .question { font-size: 1.25rem; font-weight: 600; color: var(--primary); margin-bottom: 20px; line-height: 1.4; }
+        .options { display: grid; gap: 12px; }
+        .option { padding: 15px; border: 2px solid #cbd5e1; border-radius: 12px; cursor: pointer; transition: 0.3s; font-size: 1.1rem; background: #fff; }
+        .option:hover { border-color: var(--accent); background: #fffcf0; }
+
+        /* Highlight Logic */
+        .correct { background: var(--success) !important; color: white; border-color: #14532d; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); }
+        .wrong { background: var(--error) !important; color: white; border-color: #7f1d1d; }
+        .locked { pointer-events: none; }
+
+        /* Result Screen */
+        .result-screen { display: none; text-align: center; padding: 50px 20px; }
+        .final-score { font-size: 4rem; font-weight: 900; color: var(--primary); margin: 20px 0; }
+        
+        .btn { padding: 16px 30px; border-radius: 12px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; margin: 10px; transition: 0.3s; }
+        .btn-wa { background: #25d366; color: white; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); }
+        .btn-retry { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+
+<audio id="correctSnd" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+<audio id="wrongSnd" src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"></audio>
+
+<div class="container">
+    <div class="header">
+        <div class="center-name">Super Success Computer Education Center</div>
+        <div class="address">
+            22/1 Bipin Paul Road, Nimta, Kolkata- 700049<br>
+            <i class="fas fa-phone"></i> 8017247298
+        </div>
+        <h2 style="margin:5px 0 0; color:#fff">Mock Test 2026: STACK (Chapter-4)</h2>
+    </div>
+
+    <div class="sticky-stats" id="statsBar">
+        <div class="timer-box"><i class="fas fa-stopwatch"></i> <span id="timer">00:00</span></div>
+        <div>Score: <span id="scoreText">0</span> / 15</div>
+    </div>
+
+    <div id="quiz-box">
+        </div>
+
+    <div id="result-box" class="result-screen">
+        <i class="fas fa-trophy" style="font-size: 100px; color: #f59e0b;"></i>
+        <h1>সাবাশ! পরীক্ষা সম্পন্ন হয়েছে</h1>
+        <div class="final-score" id="scoreDisplay">0</div>
+        <p style="font-size:1.2rem">সময় লেগেছে: <span id="timeTaken">0</span></p>
+        
+        <a id="waLink" href="#" target="_blank" class="btn btn-wa">
+            <i class="fab fa-whatsapp"></i> স্যারকে রেজাল্ট জানাও
+        </a><br>
+        <button class="btn btn-retry" onclick="location.reload()">আবার শুরু করো</button>
+    </div>
+</div>
+
+<script>
+    const stackQuestions = [
+        { q: "Stack কোন নীতিতে (Principle) কাজ করে?", o: ["FIFO", "LIFO", "FILO"], c: "LIFO" },
+        { q: "LIFO-এর পূর্ণরূপ কী?", o: ["Last In First Out", "List In First Out", "Last In Fast Out"], c: "Last In First Out" },
+        { q: "Stack-এ নতুন উপাদান যোগ করাকে কী বলে?", o: ["Pop", "Push", "Peek"], c: "Push" },
+        { q: "Stack থেকে উপাদান অপসারণ করাকে কী বলে?", o: ["Push", "Pop", "Delete"], c: "Pop" },
+        { q: "Stack-এর সর্বশেষ উপাদানের অবস্থান নির্দেশকারীকে কী বলে?", o: ["Head", "Bottom", "Top"], c: "Top" },
+        { q: "Stack পূর্ণ থাকা অবস্থায় Push করার চেষ্টাকে কী বলে?", o: ["Underflow", "Overflow", "Error"], c: "Overflow" },
+        { q: "Stack খালি থাকা অবস্থায় Pop করার চেষ্টাকে কী বলে?", o: ["Overflow", "Underflow", "Empty"], c: "Underflow" },
+        { q: "Stack কোন ধরনের Data Structure?", o: ["Linear", "Non-Linear", "Tree"], c: "Linear" },
+        { q: "প্লেটের স্তূপ কিসের বাস্তব উদাহরণ?", o: ["Queue", "Stack", "Array"], c: "Stack" },
+        { q: "Undo/Redo অপারেশনে কোন Data Structure ব্যবহৃত হয়?", o: ["Stack", "Array", "Linked List"], c: "Stack" },
+        { q: "Stack-এর Top-এর প্রাথমিক মান (খালি অবস্থায়) কত থাকে?", o: ["0", "1", "-1"], c: "-1" },
+        { q: "গাণিতিক Expression Evaluation-এ কোনটি ব্যবহৃত হয়?", o: ["Stack", "Queue", "Linked List"], c: "Stack" },
+        { q: "Pop অপারেশনের পর Top-এর মানের কী পরিবর্তন হয়?", o: ["Top = Top + 1", "Top = Top - 1", "অপরিবর্তিত থাকে"], c: "Top = Top - 1" },
+        { q: "Push অপারেশনের পর Top-এর মানের কী পরিবর্তন হয়?", o: ["Top = Top + 1", "Top = Top - 1", "Top = 0"], c: "Top = Top + 1" },
+        { q: "Stack-এ কি Random Access সম্ভব?", o: ["হ্যাঁ", "না", "মাঝে মাঝে"], c: "না" }
+    ];
+
+    let score = 0, current = 0, sec = 0;
+    let timerId = setInterval(() => {
+        sec++;
+        let m = Math.floor(sec/60), s = sec%60;
+        document.getElementById('timer').innerText = `${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+    }, 1000);
+
+    const quizBox = document.getElementById('quiz-box');
+    stackQuestions.forEach((data, idx) => {
+        let optHtml = data.o.map(opt => `<div class="option" onclick="handle(this, '${opt}', '${data.c}')">${opt}</div>`).join('');
+        quizBox.innerHTML += `
+            <div class="q-card">
+                <div class="question">${idx+1}. ${data.q}</div>
+                <div class="options">${optHtml}</div>
+            </div>
+        `;
+    });
+
+    function handle(el, sel, cor) {
+        let parent = el.parentElement;
+        if(parent.classList.contains('locked')) return;
+        parent.classList.add('locked');
+        current++;
+
+        if(sel === cor) {
+            score++;
+            el.classList.add('correct');
+            document.getElementById('correctSnd').play();
+            document.getElementById('scoreText').innerText = score;
+        } else {
+            el.classList.add('wrong');
+            document.getElementById('wrongSnd').play();
+            Array.from(parent.children).forEach(o => {
+                if(o.innerText === cor) o.classList.add('correct');
+            });
+        }
+
+        if(current === stackQuestions.length) finish();
+    }
+
+    function finish() {
+        clearInterval(timerId);
+        setTimeout(() => {
+            document.getElementById('quiz-box').style.display = 'none';
+            document.getElementById('statsBar').style.display = 'none';
+            document.getElementById('result-box').style.display = 'block';
+            document.getElementById('scoreDisplay').innerText = score + " / 15";
+            let finalTime = document.getElementById('timer').innerText;
+            document.getElementById('timeTaken').innerText = finalTime;
+
+            let text = `স্যার, আমি STACK মক টেস্ট ২০২৬ সম্পন্ন করেছি।%0Aস্কোর: ${score}/15%0Aসময়: ${finalTime}%0Aনাম: `;
+            document.getElementById('waLink').href = `https://wa.me/918017247298?text=${text}`;
+        }, 1000);
+    }
+</script>
+</body>
+</html>

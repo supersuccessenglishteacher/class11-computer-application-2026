@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class XI Queue Study Material - SSCEC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a; --secondary: #334155; --accent: #22c55e; --important: #f59e0b; --bg: #f8fafc;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.7; background-color: var(--bg); margin: 0; padding: 15px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; }
+        
+        /* Branding Header */
+        .branding { background: var(--primary); color: white; text-align: center; padding: 25px; border-bottom: 5px solid var(--accent); }
+        .branding h1 { margin: 0; font-size: 1.6rem; letter-spacing: 1px; }
+        .branding p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
+
+        .chapter-header { background: #fff; padding: 20px; text-align: center; border-bottom: 1px solid #e2e8f0; }
+        .chapter-header h2 { color: #1e293b; margin: 0; font-size: 1.4rem; }
+        .exam-badge { display: inline-block; background: var(--important); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-top: 10px; }
+
+        .content { padding: 30px; }
+        .section-title { background: var(--secondary); color: white; padding: 10px 15px; border-radius: 8px; margin: 30px 0 20px; display: flex; align-items: center; }
+        .section-title i { margin-right: 10px; color: var(--accent); }
+
+        .qa-card { background: #fff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 10px; margin-bottom: 15px; transition: 0.3s; }
+        .qa-card:hover { border-color: var(--accent); box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+        .question { color: #166534; font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 8px; }
+        .answer { color: #334155; border-left: 3px solid #cbd5e1; padding-left: 12px; display: block; }
+
+        .important { background: #f0fdf4; border: 2px solid var(--accent) !important; position: relative; }
+        .important::after { content: "২০২৬ কমন ⭐"; position: absolute; top: -12px; right: 15px; background: var(--accent); color: white; padding: 2px 10px; font-size: 0.75rem; border-radius: 5px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th { background: #f1f5f9; color: var(--primary); }
+        th, td { border: 1px solid #cbd5e1; padding: 12px; text-align: center; }
+
+        .algo-box { background: #f8fafc; padding: 15px; border-radius: 8px; font-family: 'Consolas', monospace; color: #1e293b; border-left: 5px solid var(--accent); }
+
+        .footer { background: #f8fafc; text-align: center; padding: 20px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="branding">
+        <h1>Super Success Computer Education Center</h1>
+        <p>22/1 Bipin Paul Road, Nimta, Kolkata- 700049 | 📞 8017247298</p>
+    </div>
+
+    <div class="chapter-header">
+        <h2>Chapter–5 : QUEUE (কিউ)</h2>
+        <div class="exam-badge">🎯 ২০২৬ বোর্ড পরীক্ষার জন্য স্পেশাল নোট</div>
+    </div>
+
+    <div class="content">
+        <div class="section-title"><i class="fas fa-check-double"></i> 1. Very Short Answer (1 Mark)</div>
+        
+        <div class="qa-card">
+            <span class="question">Q1. Queue কী?</span>
+            <span class="answer">Queue হলো একটি <b>Linear Data Structure</b> যা <b>FIFO (First In First Out)</b> নীতিতে কাজ করে।</span>
+        </div>
+
+        
+
+        <div class="qa-card important">
+            <span class="question">Q4. Queue-এর Front ও Rear কী?</span>
+            <span class="answer">
+                <b>Front:</b> যে দিক থেকে উপাদান অপসারণ (Dequeue) করা হয়।<br>
+                <b>Rear:</b> যে দিক দিয়ে নতুন উপাদান প্রবেশ (Enqueue) করানো হয়।
+            </span>
+        </div>
+
+        <div class="section-title"><i class="fas fa-users-line"></i> 2. Short Answer (2–3 Marks)</div>
+
+        <div class="qa-card">
+            <span class="question">Q7. Queue Overflow ও Underflow কী?</span>
+            <span class="answer">
+                <b>Queue Overflow:</b> Queue পূর্ণ থাকা অবস্থায় নতুন ডেটা ঢোকানোর চেষ্টা করলে তাকে Overflow বলে।<br>
+                <b>Queue Underflow:</b> Queue খালি থাকা অবস্থায় ডেটা বের করার চেষ্টা করলে তাকে Underflow বলে।
+            </span>
+        </div>
+
+        <div class="qa-card">
+            <span class="question">Q9. Queue-এর দুটি Real Life Example লেখ।</span>
+            <span class="answer">
+                ১. সিনেমার টিকিট কাউন্টারের লাইনে দাঁড়ানো মানুষ।<br>
+                ২. প্রিন্ট দেওয়ার জন্য প্রিন্টারের ওয়েটিং লিস্ট (Printer Queue)।
+            </span>
+        </div>
+
+        <div class="section-title"><i class="fas fa-diagram-project"></i> 3. Types of Queue & Structure</div>
+
+        <div class="qa-card important">
+            <span class="question">Q12. Queue-এর প্রকারভেদ লেখ।</span>
+            <span class="answer">
+                Queue প্রধানত ৪ প্রকার:<br>
+                ১. <b>Simple Queue:</b> সাধারণ কিউ।<br>
+                ২. <b>Circular Queue:</b> গোলাকার কিউ (শেষের পর আবার শুরু)।<br>
+                ৩. <b>Priority Queue:</b> অগ্রাধিকার ভিত্তিক কিউ।<br>
+                ৪. <b>Double Ended Queue (Deque):</b> দুই দিক দিয়েই ইনপুট-আউটপুট সম্ভব।
+            </span>
+        </div>
+
+        
+
+        <div class="section-title"><i class="fas fa-code"></i> 4. Algorithms</div>
+
+        <div class="qa-card">
+            <span class="question">Q13. Queue-তে Enqueue Operation-এর Algorithm লেখ।</span>
+            <div class="answer">
+                <div class="algo-box">
+                    Step 1: Start<br>
+                    Step 2: If Rear = Max − 1 then Print "Overflow" and Exit<br>
+                    Step 3: Else Rear = Rear + 1<br>
+                    Step 4: Queue[Rear] = Item<br>
+                    Step 5: Stop
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="qa-card">
+            <span class="question">Q14. Queue-তে Dequeue Operation-এর Algorithm লেখ।</span>
+            <div class="answer">
+                <div class="algo-box">
+                    Step 1: Start<br>
+                    Step 2: If Front > Rear then Print "Underflow" and Exit<br>
+                    Step 3: Else Item = Queue[Front]<br>
+                    Step 4: Front = Front + 1<br>
+                    Step 5: Stop
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="section-title"><i class="fas fa-columns"></i> 5. Difference & Applications</div>
+
+        <div class="qa-card important">
+            <span class="question">Q15. Stack ও Queue-এর পার্থক্য লেখ।</span>
+            <table>
+                <tr>
+                    <th>বৈশিষ্ট্য</th>
+                    <th>Stack</th>
+                    <th>Queue</th>
+                </tr>
+                <tr>
+                    <td>নীতি (Logic)</td>
+                    <td>LIFO</td>
+                    <td>FIFO</td>
+                </tr>
+                <tr>
+                    <td>অপারেশন দিক</td>
+                    <td>এক দিক (Top)</td>
+                    <td>দুই দিক (Front/Rear)</td>
+                </tr>
+                <tr>
+                    <td>অপারেশন নাম</td>
+                    <td>Push & Pop</td>
+                    <td>Enqueue & Dequeue</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="qa-card">
+            <span class="question">Q16. Queue-এর ব্যবহার (Applications) লেখ।</span>
+            <span class="answer">
+                • CPU এবং ডিস্কের Scheduling-এ ব্যবহৃত হয়।<br>
+                • ডেটা বাফারিং (যেমন: ভিডিও স্ট্রিমিং)।<br>
+                • ট্রাফিক সিগন্যাল ম্যানেজমেন্ট সিস্টেমে।<br>
+                • কল সেন্টারের কল ম্যানেজমেন্টে।
+            </span>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 Super Success Computer Education Center<br>
+        সঠিক শিক্ষা - সফল ভবিষ্যৎ
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class XI Searching & Sorting - SSCEC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e293b; --secondary: #475569; --accent: #8b5cf6; --important: #f43f5e; --bg: #f8fafc;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.7; background-color: var(--bg); margin: 0; padding: 15px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+        
+        /* Branding Header */
+        .branding { background: var(--primary); color: white; text-align: center; padding: 25px; border-bottom: 5px solid var(--accent); }
+        .branding h1 { margin: 0; font-size: 1.6rem; letter-spacing: 1px; }
+        .branding p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
+
+        .chapter-header { background: #fff; padding: 20px; text-align: center; border-bottom: 1px solid #e2e8f0; }
+        .chapter-header h2 { color: #5b21b6; margin: 0; font-size: 1.4rem; }
+        .exam-badge { display: inline-block; background: var(--important); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-top: 10px; }
+
+        .content { padding: 30px; }
+        .section-title { background: var(--secondary); color: white; padding: 10px 15px; border-radius: 8px; margin: 30px 0 20px; display: flex; align-items: center; }
+        .section-title i { margin-right: 10px; color: #a78bfa; }
+
+        .qa-card { background: #fff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 10px; margin-bottom: 15px; transition: 0.3s; }
+        .qa-card:hover { border-color: var(--accent); box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+        .question { color: #6d28d9; font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 8px; }
+        .answer { color: #334155; border-left: 3px solid #cbd5e1; padding-left: 12px; display: block; }
+
+        .important { background: #fff1f2; border: 2px solid var(--important) !important; position: relative; }
+        .important::after { content: "২০২৬ কমন ⭐"; position: absolute; top: -12px; right: 15px; background: var(--important); color: white; padding: 2px 10px; font-size: 0.75rem; border-radius: 5px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95rem; }
+        th { background: #f1f5f9; color: var(--primary); }
+        th, td { border: 1px solid #cbd5e1; padding: 12px; text-align: left; }
+
+        .algo-box { background: #f8fafc; padding: 15px; border-radius: 8px; font-family: 'Consolas', monospace; color: #1e293b; border-left: 5px solid var(--accent); font-size: 0.9rem; }
+
+        .footer { background: #f8fafc; text-align: center; padding: 20px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="branding">
+        <h1>Super Success Computer Education Center</h1>
+        <p>22/1 Bipin Paul Road, Nimta, Kolkata- 700049 | 📞 8017247298</p>
+    </div>
+
+    <div class="chapter-header">
+        <h2>Chapter–7 : SEARCHING & SORTING (সার্চিং এবং সর্টিং)</h2>
+        <div class="exam-badge">🎯 ২০২৬ বোর্ড পরীক্ষার জন্য স্পেশাল নোট</div>
+    </div>
+
+    <div class="content">
+        <div class="section-title"><i class="fas fa-search"></i> 1. Very Short Answer (1 Mark)</div>
+        
+        <div class="qa-card">
+            <span class="question">Q1. Searching কী?</span>
+            <span class="answer">Searching হলো কোনো ডেটা স্ট্রাকচার (যেমন অ্যারে) থেকে নির্দিষ্ট কোনো উপাদান খুঁজে বের করার প্রক্রিয়া।</span>
+        </div>
+
+        <div class="qa-card">
+            <span class="question">Q2. Sorting কী?</span>
+            <span class="answer">Sorting হলো ডেটাগুলোকে একটি নির্দিষ্ট ক্রমে (ছোট থেকে বড় বা বড় থেকে ছোট) সাজানোর প্রক্রিয়া।</span>
+        </div>
+
+        <div class="qa-card important">
+            <span class="question">Q5. Binary Search কোন ধরনের ডেটায় কাজ করে?</span>
+            <span class="answer">Binary Search শুধুমাত্র <b>Sorted Data</b> (সাজানো ডেটা)-এর ওপর কাজ করে।</span>
+        </div>
+
+        <div class="section-title"><i class="fas fa-microchip"></i> 2. Short Answer (2–3 Marks)</div>
+
+        <div class="qa-card">
+            <span class="question">Q7. Binary Search কী?</span>
+            <span class="answer">এটি একটি উন্নত সার্চিং পদ্ধতি যেখানে ডেটাকে প্রতিবার মাঝখান থেকে ভাগ করে (Divide and Conquer) নির্দিষ্ট উপাদানটি খোঁজা হয়। এটি বড় ডেটাসেটের জন্য খুব দ্রুত কাজ করে।</span>
+        </div>
+        
+
+        <div class="section-title"><i class="fas fa-code"></i> 3. Algorithms (Long Answer)</div>
+
+        <div class="qa-card">
+            <span class="question">Q9. Linear Search Algorithm।</span>
+            <div class="answer">
+                <div class="algo-box">
+                    Step 1: Start<br>
+                    Step 2: Set i = 0<br>
+                    Step 3: If array[i] == Item then Print "Found" and Stop<br>
+                    Step 4: i = i + 1<br>
+                    Step 5: If i < n repeat Step 3, else Print "Not Found"<br>
+                    Step 6: Stop
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-card important">
+            <span class="question">Q10. Binary Search Algorithm।</span>
+            <div class="answer">
+                <div class="algo-box">
+                    Step 1: Start | low = 0, high = n-1<br>
+                    Step 2: mid = (low + high) / 2<br>
+                    Step 3: If Item == array[mid] then "Found" and Stop<br>
+                    Step 4: If Item < array[mid] then high = mid - 1<br>
+                    Step 5: Else low = mid + 1<br>
+                    Step 6: If low <= high repeat Step 2, else "Not Found"
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="section-title"><i class="fas fa-sort-amount-down"></i> 4. Sorting Algorithms</div>
+
+        <div class="qa-card important">
+            <span class="question">Q11. Bubble Sort ব্যাখ্যা কর।</span>
+            <span class="answer">
+                Bubble Sort-এ পাশাপাশি দুটি উপাদানের মধ্যে তুলনা করা হয় এবং যদি প্রথমটি বড় হয় তবে তাদের স্থান পরিবর্তন (Swap) করা হয়। এইভাবে বড় উপাদানটি বুদবুদের মতো শেষের দিকে চলে যায়।
+            </span>
+        </div>
+        
+
+        <div class="qa-card">
+            <span class="question">Q12. Selection Sort ব্যাখ্যা কর।</span>
+            <span class="answer">
+                এই পদ্ধতিতে লিস্টের সবচেয়ে ছোট উপাদানটি খুঁজে বের করা হয় এবং সেটিকে একদম শুরুর অবর্তমান অবস্থানের সাথে অদলবদল করা হয়।
+            </span>
+        </div>
+
+        <div class="section-title"><i class="fas fa-equals"></i> 5. Difference Type Question</div>
+
+        <div class="qa-card">
+            <span class="question">Q13. Linear Search ও Binary Search-এর পার্থক্য।</span>
+            <table>
+                <tr>
+                    <th>বৈশিষ্ট্য</th>
+                    <th>Linear Search</th>
+                    <th>Binary Search</th>
+                </tr>
+                <tr>
+                    <td>পদ্ধতি</td>
+                    <td>ক্রমানুসারে খোজা হয়</td>
+                    <td>মাঝখান থেকে ভাগ করে খোজা হয়</td>
+                </tr>
+                <tr>
+                    <td>শর্ত</td>
+                    <td>Sorted হওয়ার প্রয়োজন নেই</td>
+                    <td>অবশ্যই Sorted হতে হবে</td>
+                </tr>
+                <tr>
+                    <td>গতি</td>
+                    <td>ধীর গতির</td>
+                    <td>অত্যন্ত দ্রুত গতির</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="qa-card">
+            <span class="question">Q14. Bubble Sort ও Selection Sort-এর পার্থক্য।</span>
+            <table>
+                <tr>
+                    <th>Bubble Sort</th>
+                    <th>Selection Sort</th>
+                </tr>
+                <tr>
+                    <td>বারবার Swap করতে হয়</td>
+                    <td>Swap সংখ্যা অনেক কম</td>
+                </tr>
+                <tr>
+                    <td>সহজ পদ্ধতি কিন্তু সময় বেশি লাগে</td>
+                    <td>তুলনামূলক দ্রুত কাজ করে</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section-title"><i class="fas fa-lightbulb"></i> 6. Real Life Examples</div>
+        <div class="qa-card">
+            <span class="answer">
+                • <b>Searching:</b> ডিকশনারি থেকে শব্দ খোঁজা (Binary Search-এর উদাহরণ)।<br>
+                • <b>Sorting:</b> লাইব্রেরিতে বইগুলোকে বিষয়ের বর্ণানুক্রমিকভাবে সাজিয়ে রাখা।
+            </span>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 Super Success Computer Education Center<br>
+        শিক্ষার গুণমান আমাদের অঙ্গীকার
+    </div>
+</div>
+
+</body>
+</html>

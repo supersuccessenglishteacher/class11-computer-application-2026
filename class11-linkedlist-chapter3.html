@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class XI Linked List - SSCEC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e293b; --secondary: #334155; --accent: #0ea5e9; --important: #f59e0b; --bg: #f8fafc;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.7; background-color: var(--bg); margin: 0; padding: 15px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; }
+        
+        /* Branding */
+        .branding { background: var(--primary); color: white; text-align: center; padding: 25px; border-bottom: 5px solid var(--accent); }
+        .branding h1 { margin: 0; font-size: 1.6rem; letter-spacing: 1px; }
+        .branding p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
+
+        .chapter-header { background: #fff; padding: 20px; text-align: center; border-bottom: 1px solid #e2e8f0; }
+        .chapter-header h2 { color: #0369a1; margin: 0; font-size: 1.4rem; }
+        .exam-badge { display: inline-block; background: var(--important); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-top: 10px; }
+
+        .content { padding: 30px; }
+        .section-title { background: var(--secondary); color: white; padding: 10px 15px; border-radius: 8px; margin: 30px 0 20px; display: flex; align-items: center; }
+        .section-title i { margin-right: 10px; color: var(--accent); }
+
+        .qa-card { background: #fff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 10px; margin-bottom: 15px; transition: 0.3s; }
+        .qa-card:hover { border-color: var(--accent); box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+        .question { color: #0284c7; font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 8px; }
+        .answer { color: #334155; border-left: 3px solid #cbd5e1; padding-left: 12px; display: block; }
+
+        .important { background: #fffcf0; border: 2px solid var(--important) !important; position: relative; }
+        .important::after { content: "২০২৬ কমন ⭐"; position: absolute; top: -12px; right: 15px; background: var(--important); color: white; padding: 2px 10px; font-size: 0.75rem; border-radius: 5px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th { background: #f1f5f9; color: var(--primary); }
+        th, td { border: 1px solid #cbd5e1; padding: 12px; text-align: left; }
+
+        .footer { background: #f8fafc; text-align: center; padding: 20px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0; }
+        code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #be185d; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="branding">
+        <h1>Super Success Computer Education Center</h1>
+        <p>22/1 Bipin Paul Road, Nimta, Kolkata- 700049 | 📞 8017247298</p>
+    </div>
+
+    <div class="chapter-header">
+        <h2>Chapter–3 : LINKED LIST (লিংকড লিস্ট)</h2>
+        <div class="exam-badge">🎯 ২০২৬ বোর্ড পরীক্ষার জন্য স্পেশাল নোট</div>
+    </div>
+
+    <div class="content">
+        <div class="section-title"><i class="fas fa-info-circle"></i> 1. Very Short Answer (1 Mark)</div>
+        
+        <div class="qa-card">
+            <span class="question">Q1. Linked List কী?</span>
+            <span class="answer">Linked List হলো একটি <b>Dynamic Linear Data Structure</b> যেখানে ডেটা <b>Node</b> আকারে সংরক্ষিত থাকে এবং প্রতিটি Node পরবর্তী Node-এর address ধারণ করে।</span>
+        </div>
+
+        <div class="qa-card important">
+            <span class="question">Q2. Node কাকে বলে?</span>
+            <span class="answer">Linked List-এর প্রতিটি অংশকে Node বলে। একটি Node দুটি অংশ নিয়ে গঠিত: <b>Data Part</b> (তথ্য) এবং <b>Address/Link Part</b> (পরবর্তী নোডের ঠিকানা)।</span>
+        </div>
+        
+
+        <div class="qa-card">
+            <span class="question">Q4. Linked List-এর প্রথম Node-কে কী বলে?</span>
+            <span class="answer">Linked List-এর প্রথম Node-কে <b>Head Node</b> বলা হয়।</span>
+        </div>
+
+        <div class="section-title"><i class="fas fa-balance-scale"></i> 2. Short Answer (2–3 Marks)</div>
+
+        <div class="qa-card">
+            <span class="question">Q6. Array ও Linked List-এর মূল পার্থক্য লেখ।</span>
+            <span class="answer">
+                • Array-তে মেমোরি <b>Continuous</b> (ধারাবাহিক), কিন্তু Linked List-এ <b>Non-continuous</b>।<br>
+                • Array একটি <b>Static</b> স্ট্রাকচার, অন্যদিকে Linked List হলো <b>Dynamic</b>।
+            </span>
+        </div>
+
+        <div class="section-title"><i class="fas fa-layer-group"></i> 3. Long Answer & Structure</div>
+
+        <div class="qa-card important">
+            <span class="question">Q8. Linked List-এর গঠন (Structure) ব্যাখ্যা কর।</span>
+            <span class="answer">
+                Linked List-এর প্রতিটি নোড দুটি অংশে বিভক্ত:<br>
+                ১. <b>Data Part:</b> এটি মূল তথ্য বা ভ্যালু ধারণ করে।<br>
+                ২. <b>Link Part:</b> এটি পরবর্তী নোডের মেমোরি অ্যাড্রেস ধারণ করে।<br>
+                <b>দ্রষ্টব্য:</b> লিস্টের শেষ নোডের লিঙ্ক অংশে <code>NULL</code> থাকে, যা লিস্টের সমাপ্তি বোঝায়।
+            </span>
+        </div>
+        
+
+        <div class="qa-card important">
+            <span class="question">Q10. Linked List-এর প্রকারভেদ লেখ।</span>
+            <span class="answer">
+                Linked List প্রধানত ৩ প্রকার:<br>
+                ১. <b>Singly Linked List:</b> প্রতিটি নোড শুধু পরবর্তী নোডের অ্যাড্রেস রাখে।<br>
+                ২. <b>Doubly Linked List:</b> প্রতিটি নোড তার আগের এবং পরের—উভয় নোডের অ্যাড্রেস রাখে।<br>
+                ৩. <b>Circular Linked List:</b> এখানে শেষ নোডটি আবার প্রথম নোডকে নির্দেশ করে।
+            </span>
+        </div>
+        [Image showing comparison between Singly, Doubly, and Circular Linked Lists]
+
+        <div class="section-title"><i class="fas fa-table"></i> 4. Difference & Examples</div>
+
+        <div class="qa-card">
+            <span class="question">Q11. Array ও Linked List-এর পার্থক্য।</span>
+            <table>
+                <tr>
+                    <th>বৈশিষ্ট্য</th>
+                    <th>Array</th>
+                    <th>Linked List</th>
+                </tr>
+                <tr>
+                    <td>Memory Type</td>
+                    <td>Static</td>
+                    <td>Dynamic</td>
+                </tr>
+                <tr>
+                    <td>Access Speed</td>
+                    <td>দ্রুত (Fast)</td>
+                    <td>ধীর (Slow)</td>
+                </tr>
+                <tr>
+                    <td>Insertion/Deletion</td>
+                    <td>কঠিন</td>
+                    <td>সহজ</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="qa-card">
+            <span class="question">Q12. Real Life Example।</span>
+            <span class="answer">
+                • <b>ট্রেনের বগি:</b> প্রতিটি বগি তার পরের বগির সাথে শিকল দিয়ে যুক্ত।<br>
+                • <b>Browser Navigation:</b> ব্যাক এবং ফরোয়ার্ড বাটন দিয়ে পেজ ভিজিট করা।
+            </span>
+        </div>
+
+        <div class="section-title"><i class="fas fa-terminal"></i> 5. Algorithm</div>
+        
+        <div class="qa-card">
+            <span class="question">Q13. Linked List Traversal-এর Algorithm।</span>
+            <span class="answer">
+                ১. Start<br>
+                ২. Set <code>pointer = Head</code><br>
+                ৩. Repeat while <code>pointer ≠ NULL</code>:<br>
+                &nbsp;&nbsp;&nbsp;a. Display <code>pointer -> Data</code><br>
+                &nbsp;&nbsp;&nbsp;b. <code>pointer = pointer -> next</code><br>
+                ৪. Stop
+            </span>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 Super Success Computer Education Center<br>
+        শিক্ষার আলো পৌঁছে দেওয়াই আমাদের লক্ষ্য
+    </div>
+</div>
+
+</body>
+</html>

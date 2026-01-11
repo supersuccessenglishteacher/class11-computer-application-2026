@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class XI Recursion Study Material - SSCEC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e1b4b; --secondary: #312e81; --accent: #f59e0b; --important: #e11d48; --bg: #f8fafc;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.7; background-color: var(--bg); margin: 0; padding: 15px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; }
+        
+        /* Branding Header */
+        .branding { background: var(--primary); color: white; text-align: center; padding: 25px; border-bottom: 5px solid var(--accent); }
+        .branding h1 { margin: 0; font-size: 1.6rem; letter-spacing: 1px; }
+        .branding p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
+
+        .chapter-header { background: #fff; padding: 20px; text-align: center; border-bottom: 1px solid #e2e8f0; }
+        .chapter-header h2 { color: #312e81; margin: 0; font-size: 1.4rem; }
+        .exam-badge { display: inline-block; background: var(--important); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-top: 10px; }
+
+        .content { padding: 30px; }
+        .section-title { background: var(--secondary); color: white; padding: 10px 15px; border-radius: 8px; margin: 30px 0 20px; display: flex; align-items: center; }
+        .section-title i { margin-right: 10px; color: var(--accent); }
+
+        .qa-card { background: #fff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 10px; margin-bottom: 15px; transition: 0.3s; }
+        .qa-card:hover { border-color: var(--accent); box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+        .question { color: #4338ca; font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 8px; }
+        .answer { color: #334155; border-left: 3px solid #cbd5e1; padding-left: 12px; display: block; }
+
+        .important { background: #fff1f2; border: 2px solid var(--important) !important; position: relative; }
+        .important::after { content: "২০২৬ স্পেশাল ⭐"; position: absolute; top: -12px; right: 15px; background: var(--important); color: white; padding: 2px 10px; font-size: 0.75rem; border-radius: 5px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th { background: #f1f5f9; color: var(--primary); }
+        th, td { border: 1px solid #cbd5e1; padding: 12px; text-align: center; }
+
+        .algo-box { background: #f8fafc; padding: 15px; border-radius: 8px; font-family: 'Consolas', monospace; color: #1e293b; border-left: 5px solid var(--important); }
+
+        .footer { background: #f8fafc; text-align: center; padding: 20px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="branding">
+        <h1>Super Success Computer Education Center</h1>
+        <p>22/1 Bipin Paul Road, Nimta, Kolkata- 700049 | 📞 8017247298</p>
+    </div>
+
+    <div class="chapter-header">
+        <h2>Chapter–6 : RECURSION (রেকারশন)</h2>
+        <div class="exam-badge">🎯 ২০২৬ বোর্ড পরীক্ষার জন্য স্পেশাল নোট</div>
+    </div>
+
+    <div class="content">
+        <div class="section-title"><i class="fas fa-sync-alt"></i> 1. Very Short Answer (1 Mark)</div>
+        
+        <div class="qa-card">
+            <span class="question">Q1. Recursion কী?</span>
+            <span class="answer">Recursion হলো এমন একটি পদ্ধতি যেখানে একটি Function নিজেকেই বারবার Call করে কোনো সমস্যার সমাধান করে।</span>
+        </div>
+
+        <div class="qa-card important">
+            <span class="question">Q3. Base Case কী?</span>
+            <span class="answer">Recursion বন্ধ করার জন্য যে শর্ত বা Condition ব্যবহার করা হয় তাকে <b>Base Case</b> বলে। এটি না থাকলে প্রোগ্রাম অনন্তকাল চলতে থাকবে।</span>
+        </div>
+
+        <div class="qa-card">
+            <span class="question">Q4. Recursion কোন Data Structure ব্যবহার করে?</span>
+            <span class="answer">Recursion ইন্টারনালি <b>Stack</b> Data Structure ব্যবহার করে প্রতিটি ফাংশন কল সেভ করে রাখে।</span>
+        </div>
+
+        <div class="section-title"><i class="fas fa-question-circle"></i> 2. Short Answer (2–3 Marks)</div>
+
+        <div class="qa-card">
+            <span class="question">Q7. Base Case কেন প্রয়োজন?</span>
+            <span class="answer">
+                ১. Recursion বন্ধ করার জন্য।<br>
+                ২. <b>Stack Overflow</b> এর হাত থেকে মেমোরিকে বাঁচানোর জন্য।<br>
+                ৩. সঠিক আউটপুট পাওয়ার জন্য।
+            </span>
+        </div>
+
+        
+
+        <div class="section-title"><i class="fas fa-project-diagram"></i> 3. Long Answer & Methods</div>
+
+        <div class="qa-card important">
+            <span class="question">Q9. Recursion-এর কাজ করার পদ্ধতি ব্যাখ্যা কর।</span>
+            <span class="answer">
+                Recursion মূলত দুটি ফেজে কাজ করে:<br>
+                ১. <b>Winding Phase:</b> যেখানে ফাংশন নিজেকে কল করতে করতে বেস কেস পর্যন্ত পৌঁছায়।<br>
+                ২. <b>Unwinding Phase:</b> যেখানে বেস কেস থেকে রেজাল্ট নিয়ে আগের কলগুলোতে ফিরে আসে এবং চূড়ান্ত মান নির্ণয় করে।
+            </span>
+        </div>
+
+        <div class="qa-card">
+            <span class="question">Q10. Recursion-এর সুবিধা ও অসুবিধা লেখ।</span>
+            <span class="answer">
+                <b>সুবিধা:</b> কোড ছোট হয় এবং জটিল গাণিতিক বা ট্রি (Tree) সংক্রান্ত সমস্যা সহজে সমাধান করা যায়।<br>
+                <b>অসুবিধা:</b> এটি বেশি মেমোরি ব্যবহার করে এবং লুপের তুলনায় কিছুটা ধীর গতির হতে পারে।
+            </span>
+        </div>
+
+        <div class="section-title"><i class="fas fa-laptop-code"></i> 4. Programming & Algorithm</div>
+
+        <div class="qa-card">
+            <span class="question">Q11. Factorial বের করার Algorithm (Recursion)।</span>
+            <div class="answer">
+                <div class="algo-box">
+                    Step 1: Start<br>
+                    Step 2: Define function Factorial(n)<br>
+                    Step 3: If n == 0 return 1 (Base Case)<br>
+                    Step 4: Else return n * Factorial(n - 1)<br>
+                    Step 5: Stop
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="section-title"><i class="fas fa-exchange-alt"></i> 5. Difference & Examples</div>
+
+        <div class="qa-card important">
+            <span class="question">Q13. Recursion ও Iteration (Loop)-এর পার্থক্য।</span>
+            <table>
+                <tr>
+                    <th>বৈশিষ্ট্য</th>
+                    <th>Recursion</th>
+                    <th>Iteration (Loop)</th>
+                </tr>
+                <tr>
+                    <td>পদ্ধতি</td>
+                    <td>ফাংশন নিজেকে কল করে</td>
+                    <td>বারবার লুপ ঘোরে</td>
+                </tr>
+                <tr>
+                    <td>মেমোরি</td>
+                    <td>বেশি মেমোরি (Stack) লাগে</td>
+                    <td>কম মেমোরি লাগে</td>
+                </tr>
+                <tr>
+                    <td>গতি (Speed)</td>
+                    <td>তুলনামূলক ধীর</td>
+                    <td>দ্রুত</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="qa-card">
+            <span class="question">Q14. Real Life Example।</span>
+            <span class="answer">
+                • <b>Mirror Effect:</b> একটি আয়নার সামনে আরেকটি আয়না রাখলে যেমন ছবির ভিতর ছবি দেখা যায়।<br>
+                • <b>Nested Folders:</b> একটি ফোল্ডারের ভিতর আরেকটি ফোল্ডার থাকার প্রক্রিয়া।
+            </span>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 Super Success Computer Education Center<br>
+        সঠিক দিকনির্দেশনা - নিশ্চিত সফলতা
+    </div>
+</div>
+
+</body>
+</html>

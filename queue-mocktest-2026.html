@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Test 2026 - QUEUE | SSCEC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #064e3b; --accent: #10b981; --success: #22c55e; --error: #ef4444; --bg: #f0fdf4;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
+        
+        /* Header & Branding */
+        .header { background: #065f46; color: white; padding: 25px 15px; text-align: center; border-radius: 15px 15px 0 0; border-bottom: 5px solid var(--accent); }
+        .center-name { font-size: 1.6rem; font-weight: 800; color: #6ee7b7; margin-bottom: 5px; }
+        .address { font-size: 0.9rem; opacity: 0.9; margin-bottom: 10px; }
+
+        .sticky-stats { position: sticky; top: 0; z-index: 100; background: #064e3b; color: white; padding: 12px; display: flex; justify-content: space-around; font-weight: bold; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .timer-box { color: #a7f3d0; font-size: 1.2rem; }
+
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; }
+        
+        .q-card { padding: 25px; border-bottom: 1px solid #e2e8f0; animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .question { font-size: 1.2rem; font-weight: 600; color: #111827; margin-bottom: 20px; line-height: 1.5; }
+        .options { display: grid; gap: 12px; }
+        .option { padding: 15px; border: 2px solid #d1fae5; border-radius: 12px; cursor: pointer; transition: 0.3s; font-size: 1.1rem; background: #fff; }
+        .option:hover { border-color: var(--accent); background: #f0fdf4; }
+
+        /* Highlight Logic */
+        .correct { background: var(--success) !important; color: white; border-color: #14532d; }
+        .wrong { background: var(--error) !important; color: white; border-color: #7f1d1d; }
+        .locked { pointer-events: none; opacity: 0.8; }
+
+        /* Result Area */
+        .result-screen { display: none; text-align: center; padding: 50px 20px; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid var(--accent); line-height: 150px; font-size: 3rem; margin: 0 auto 20px; font-weight: 800; color: var(--primary); }
+        
+        .btn { padding: 15px 25px; border-radius: 12px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; margin: 10px; transition: 0.3s; }
+        .btn-wa { background: #25d366; color: white; box-shadow: 0 4px 10px rgba(37,211,102,0.3); }
+        .btn-retry { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+
+<audio id="winSnd" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+<audio id="failSnd" src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"></audio>
+
+<div class="container">
+    <div class="header">
+        <div class="center-name">Super Success Computer Education Center</div>
+        <div class="address">
+            22/1 Bipin Paul Road, Nimta, Kolkata- 700049<br>
+            <i class="fas fa-phone"></i> 8017247298
+        </div>
+        <h2 style="margin:5px 0 0; color:#fff">Mock Test 2026: QUEUE (Chapter-5)</h2>
+    </div>
+
+    <div class="sticky-stats" id="stats">
+        <div class="timer-box"><i class="fas fa-clock"></i> <span id="time">00:00</span></div>
+        <div>Score: <span id="currentScore">0</span> / 16</div>
+    </div>
+
+    <div id="quiz-area">
+        </div>
+
+    <div id="result-area" class="result-screen">
+        <i class="fas fa-check-circle" style="font-size: 80px; color: var(--accent);"></i>
+        <h2>অভিনন্দন! পরীক্ষা শেষ হয়েছে</h2>
+        <div class="score-circle" id="finalScore">0</div>
+        <p>সময় লেগেছে: <span id="finalTime">0</span></p>
+        
+        <a id="waBtn" href="#" target="_blank" class="btn btn-wa">
+            <i class="fab fa-whatsapp"></i> স্যারকে জানাও (Send Result)
+        </a><br>
+        <button class="btn btn-retry" onclick="location.reload()">আবার শুরু করো</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "Queue কোন নীতিতে (Principle) কাজ করে?", o: ["LIFO", "FIFO", "LILO"], c: "FIFO" },
+        { q: "FIFO-এর পূর্ণরূপ কী?", o: ["First In First Out", "Fast In Fast Out", "First Input First Output"], c: "First In First Out" },
+        { q: "Queue-তে নতুন উপাদান যোগ করাকে কী বলে?", o: ["Enqueue", "Dequeue", "Push"], c: "Enqueue" },
+        { q: "Queue থেকে উপাদান অপসারণ করাকে কী বলে?", o: ["Enqueue", "Dequeue", "Pop"], c: "Dequeue" },
+        { q: "Queue-তে যে দিক দিয়ে উপাদান অপসারণ করা হয় তাকে কী বলে?", o: ["Rear", "Front", "Top"], c: "Front" },
+        { q: "Queue-তে যে দিক দিয়ে নতুন উপাদান প্রবেশ করে তাকে কী বলে?", o: ["Rear", "Front", "Bottom"], c: "Rear" },
+        { q: "Queue পূর্ণ থাকা অবস্থায় Enqueue করার চেষ্টাকে কী বলে?", o: ["Underflow", "Overflow", "Full-stack"], c: "Overflow" },
+        { q: "Queue খালি থাকা অবস্থায় Dequeue করার চেষ্টাকে কী বলে?", o: ["Underflow", "Overflow", "Empty-stack"], c: "Underflow" },
+        { q: "টিকিট কাউন্টারের লাইন কিসের উদাহরণ?", o: ["Stack", "Queue", "Tree"], c: "Queue" },
+        { q: "কোন ধরনের Queue-তে শেষ নোড আবার প্রথম নোডের সাথে যুক্ত থাকে?", o: ["Simple Queue", "Circular Queue", "Priority Queue"], c: "Circular Queue" },
+        { q: "Queue কোন ধরনের Data Structure?", o: ["Linear", "Non-Linear", "Dynamic-Tree"], c: "Linear" },
+        { q: "অগ্রাধিকারের ভিত্তিতে ডেটা প্রসেস করা হয় কোন Queue-তে?", o: ["Circular Queue", "Priority Queue", "Deque"], c: "Priority Queue" },
+        { q: "Enqueue অপারেশনের পর Rear-এর মানের কী পরিবর্তন হয়?", o: ["Rear = Rear + 1", "Rear = Rear - 1", "অপরিবর্তিত থাকে"], c: "Rear = Rear + 1" },
+        { q: "Dequeue অপারেশনের পর Front-এর মানের কী পরিবর্তন হয়?", o: ["Front = Front + 1", "Front = Front - 1", "Front = 0"], c: "Front = Front + 1" },
+        { q: "কম্পিউটার নেটওয়ার্কে ডেটা বাফারিং-এ কোনটি ব্যবহৃত হয়?", o: ["Stack", "Queue", "Array"], c: "Queue" },
+        { q: "CPU Scheduling-এ নিচের কোনটি ব্যবহৃত হয়?", o: ["Queue", "Stack", "Linked List"], c: "Queue" }
+    ];
+
+    let score = 0, answered = 0, seconds = 0;
+    let timer = setInterval(() => {
+        seconds++;
+        let m = Math.floor(seconds/60), s = seconds%60;
+        document.getElementById('time').innerText = `${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+    }, 1000);
+
+    const quizArea = document.getElementById('quiz-area');
+    questions.forEach((item, index) => {
+        let opts = item.o.map(opt => `<div class="option" onclick="checkAns(this, '${opt}', '${item.c}')">${opt}</div>`).join('');
+        quizArea.innerHTML += `
+            <div class="q-card">
+                <div class="question">${index+1}. ${item.q}</div>
+                <div class="options">${opts}</div>
+            </div>
+        `;
+    });
+
+    function checkAns(el, selected, correct) {
+        let parent = el.parentElement;
+        if(parent.classList.contains('locked')) return;
+        parent.classList.add('locked');
+        answered++;
+
+        if(selected === correct) {
+            score++;
+            el.classList.add('correct');
+            document.getElementById('winSnd').play();
+            document.getElementById('currentScore').innerText = score;
+        } else {
+            el.classList.add('wrong');
+            document.getElementById('failSnd').play();
+            Array.from(parent.children).forEach(opt => {
+                if(opt.innerText === correct) opt.classList.add('correct');
+            });
+        }
+
+        if(answered === questions.length) finish();
+    }
+
+    function finish() {
+        clearInterval(timer);
+        setTimeout(() => {
+            document.getElementById('quiz-area').style.display = 'none';
+            document.getElementById('stats').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+            document.getElementById('finalScore').innerText = score;
+            let timeStr = document.getElementById('time').innerText;
+            document.getElementById('finalTime').innerText = timeStr;
+
+            let msg = `স্যার, আমি QUEUE মক টেস্ট ২০২৬ সম্পন্ন করেছি।%0Aস্কোর: ${score}/16%0Aসময়: ${timeStr}%0Aছাত্রের নাম: `;
+            document.getElementById('waBtn').href = `https://wa.me/918017247298?text=${msg}`;
+        }, 800);
+    }
+</script>
+</body>
+</html>
